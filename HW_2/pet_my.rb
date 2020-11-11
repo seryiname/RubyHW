@@ -1,8 +1,8 @@
 class Hedgehog
   #Їжачок
-  def initialize(name, nice, choice)
+  def initialize(name, choice)
     @name = name
-    @nice = nice
+    @choice = choice
     @life = 4
     @angry = 0
     @sleep = false
@@ -14,9 +14,8 @@ class Hedgehog
     @study = 0
     @playfull = 20
     @mood = 20
-    puts "Привіт! Це #{@name} - #{@nice} їжачок, він хоче турботи та ласки, подбай про нього"
+    puts "Привіт! Це #{@name} - він хороший їжачок, він хоче турботи та ласки, подбай про нього"
   end
-
   
   # Eating
   def eating 
@@ -25,7 +24,6 @@ class Hedgehog
     else
       puts "#{@name} дуже голодна(ий), з'їсть навіть слона!"
       @eat = -1
-      passed_time
     end
   end
   # Drinking
@@ -35,7 +33,6 @@ class Hedgehog
     else
       puts "#{@name} дуже спраглий. Де вода-а-а-а?!"
       @drink = -1
-      passed_time
     end
   end
   # WC
@@ -45,7 +42,6 @@ class Hedgehog
     else
       puts "#{@name} дуже хоче в туалет, прям не може терпіти!"
       @wс = 0
-      passed_time
     end
   end
   #Study
@@ -55,7 +51,6 @@ class Hedgehog
       @study += 1
     else
       @study += 3
-      passed_time
     end
   # Bath (clean)
   def go_bath
@@ -65,7 +60,6 @@ class Hedgehog
     else
       puts "#{@name} - чистюля, цьом!"
     end
-    passed_time
   end
   #Game
   def play_game 
@@ -78,7 +72,6 @@ class Hedgehog
         puts "Їжачок проколов м'ячик голками та не 
         хоче гратися. Game over("
       end
-      passed_time
   end
 
   # Sleep
@@ -88,35 +81,25 @@ class Hedgehog
     else
       puts "#{@name} солодко заснула(в) та сопить уві сні:)"
       @sleep = 0
-      2.times { passed_time }
+      2.times do
     end
   end
-  passed_time
-  
+   
   #Help       
   
   def help
     puts "Голод: #{@eat}"
-    puts "Голод: #{@drink}"
+    puts "Спрага: #{@drink}"
     puts "Туалет: #{@wc}"
     puts "Еволюція: #{@study}"
     puts "Купання: #{@soiled}"
     puts "Гратися: #{@play}"
     puts "Життя: #{@life}"
   end
-end  
+end  # /Hedgehog
 
 private
-
-def passed_time
-  @eat += 1
-  @drink += 1
-  @wc += 1
-  @sleep += 1
-  @mood -= 1
-  @playfull -= 1
-  #life
-  #eat
+            
   if @eat >= 11 
     puts "Увага! Нагодуй їжачка, він дуже голодний!"
   end
@@ -155,7 +138,7 @@ def passed_time
     puts "Їжачок довіряв тобі, а ти його підвів((("
     exit
   end
-  
+
   #drink
   if @drink >= 11 
     puts "Увага! Їжачок дуже хоче пити!"
@@ -166,33 +149,26 @@ def passed_time
     exit
   end
   
-  #life
-  if life.zero?
-    puts "Ти програв #{@name}"
-    exit
-  end  
-end  
+end # /private
 
+puts "Введіть iм'я їжачка:"
+name = gets.chomp
+choice = gets.chomp
+hedg = Hedgehog.new name, choice
+puts "1 - погодувати"
+puts "2 - попоїти"
+puts "3 - зводити в туалет"
+puts "4 - дресирувати"
+puts "5 - покупати"
+puts "6 - погратися"
+puts "7 - спати"
+puts "8 - exit"
 
-  puts "Введіть iм'я їжачка:"
-  name = gets.chomp
-  puts "Вибери дію: "
-  choice = gets.chomp
-  hedg = Hedgehog.new name, choice
-  puts "1 - погодувати"
-  puts "2 - попоїти"
-  puts "3 - зводити в туалет"
-  puts "4 - дресирувати"
-  puts "5 - покупати"
-  puts "6 - погратися"
-  puts "7 - спати"
-  puts "8 - exit"
+sw = 0
 
-  sw = 0
-
-  while sw != 8
-    sw = gets.chomp.strip
-    case sw
+while sw != 8
+  sw = gets.to_i
+  case sw
     when 1
       hedg.eating
     when 2
@@ -204,12 +180,12 @@ end
     when 5
       hedg.go_bath
     when 6
-      hedg.play_game
-    when 6
-      hedg.take_sleep
-    when 6
-      hedg.exit 
+      hedg.play_game 
     when 7
+      hedg.take_sleep 
+    when 8
+      hedg.exit 
+    when 9 
       puts "1 - погодувати"
       puts "2 - попоїти"
       puts "3 - зводити в туалет"
@@ -220,4 +196,5 @@ end
       puts "8 - exit"
     end
   end 
-end
+end # /while     
+
