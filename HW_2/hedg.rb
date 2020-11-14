@@ -232,7 +232,7 @@ puts "Введіть ім'я тваринки:"
 name = gets.chomp
 puts "Їжачок #{@name} дуже радий тебе бачити, а ти його?"
 kind = gets.chomp
-hedg = Hedgehog::new name, kind
+hedg = Hedgehog.new name, kind
 puts "1 - погодувати"
 puts "2 - погратись"
 puts "3 - покласти спати"
